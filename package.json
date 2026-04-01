@@ -1,0 +1,63 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "workspace",
+  "title": "Workspace",
+  "description": "Open projects from workspace",
+  "icon": "extension-icon.png",
+  "author": "ErBlack",
+  "categories": [
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "workspace",
+      "title": "Open from Workspace",
+      "description": "Open project in editor or terminal",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "dirs",
+          "title": "Directories",
+          "type": "textfield",
+          "required": true,
+          "description": "Directories to search for projects (comma separated)"
+        },
+        {
+          "name": "editor",
+          "title": "Editor",
+          "type": "appPicker",
+          "required": false,
+          "description": "Editor to open projects"
+        },
+        {
+          "name": "terminal",
+          "title": "Terminal",
+          "type": "appPicker",
+          "required": false,
+          "description": "Terminal to open projects"
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.94.2",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
