@@ -28,40 +28,43 @@ export default function Ws() {
 
   return (
     <List>
-      {data.map(({ name, fullPath, type }) => (
-        <List.Item
-          key={fullPath}
-          icon={{
-            source: type === "folder" ? Icon.Folder : Icon.Document,
-            tintColor: type === "folder" ? Color.Orange : Color.Blue,
-          }}
-          title={name}
-          subtitle={fullPath}
-          actions={
-            <ActionPanel>
-              {editor && (
-                <Action.Open
-                  icon={Icon.Pencil}
-                  title={`Open in ${editor.name}`}
-                  onOpen={() => visitItem({ name, fullPath, type })}
-                  target={fullPath}
-                  application={editor}
-                />
-              )}
-              {terminal && (
-                <Action.Open
-                  icon={Icon.Terminal}
-                  title={`Open in ${terminal.name}`}
-                  onOpen={() => visitItem({ name, fullPath, type })}
-                  target={fullPath}
-                  application={terminal}
-                />
-              )}
-              <Action.CopyToClipboard content={fullPath} />
-            </ActionPanel>
-          }
-        />
-      ))}
+      {data.map((item) => {
+        const { name, fullPath, folderPath, type } = item;
+        return (
+          <List.Item
+            key={fullPath}
+            icon={{
+              source: type === "folder" ? Icon.Folder : Icon.Document,
+              tintColor: type === "folder" ? Color.Orange : Color.Blue,
+            }}
+            title={name}
+            subtitle={fullPath}
+            actions={
+              <ActionPanel>
+                {editor && (
+                  <Action.Open
+                    icon={Icon.Pencil}
+                    title={`Open in ${editor.name}`}
+                    onOpen={() => visitItem(item)}
+                    target={fullPath}
+                    application={editor}
+                  />
+                )}
+                {terminal && (
+                  <Action.Open
+                    icon={Icon.Terminal}
+                    title={`Open in ${terminal.name}`}
+                    onOpen={() => visitItem(item)}
+                    target={folderPath}
+                    application={terminal}
+                  />
+                )}
+                <Action.CopyToClipboard content={fullPath} />
+              </ActionPanel>
+            }
+          />
+        );
+      })}
     </List>
   );
 }
